@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>blueprintvue</title>
+
+		<link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
+		<link rel="stylesheet" href="/src/assets/blueprint.css">
+		<link rel="stylesheet" href="/src/assets/blueprint-icons.css">
+		<link rel="stylesheet" href="/src/assets/blueprint-select.css">
+		<link rel="stylesheet" href="/src/assets/blueprintvue.css">
+
+		<style>
+			body {
+				margin: 32px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app-blueprintvue">
+			<div class="row">
+				<div class="col-4">
+					<img src="/src/assets/logo.png" width="128" alt="logo">
+
+					<h1>Components</h1>
+
+					<v-button-group>
+						<v-button>Like</v-button>
+						<v-button>Comment</v-button>
+						<v-button>Share</v-button>
+					</v-button-group>
+					<br><br>
+					<v-button>Button</v-button>
+					<v-button intent="primary">Primary</v-button>
+					<v-button intent="success">Success</v-button>
+					<v-button intent="warning">Warning</v-button>
+					<v-button intent="danger">Danger</v-button>
+					<br><br>
+					<v-button icon="arrow-left">Icon left</v-button>
+					<v-button right-icon="arrow-right">Icon right</v-button>
+					<v-button icon="home"></v-button>
+					<v-button :loading="true">Loading...</v-button>
+					<br><br>
+					<v-checkbox label="Unchecked"></v-checkbox>
+					<v-checkbox label="Checked" :checked="true"></v-checkbox>
+					<v-checkbox label="Disabled" :disabled="true"></v-checkbox>
+					<v-checkbox label="Inline 1" :inline="true"></v-checkbox>
+					<v-checkbox label="Inline 2" :inline="true"></v-checkbox>
+					<v-checkbox label="Inline 3" :inline="true"></v-checkbox>
+					<br><br>
+					<v-menu>
+						<v-menu-item text="Menu item"></v-menu-item>
+						<v-menu-item text="Active" :active="true"></v-menu-item>
+						<v-menu-item text="Disabled" :disabled="true"></v-menu-item>
+						<v-menu-item text="Href" href="https://google.com.vn"></v-menu-item>
+						<v-menu-item text="Icon" icon="menu"></v-menu-item>
+						<v-menu-item text="Danger" intent="danger"></v-menu-item>
+						<v-menu-item text="Label" label="Ctrl+C"></v-menu-item>
+					</v-menu>
+				</div>
+			</div>
+		</div>
+
+		<script src="/dist/build.js"></script>
+	</body>
+</html>

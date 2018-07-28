@@ -1,0 +1,230 @@
+input, textarea, select, button, a
+.control-indicator
+	outline 0 !important
+
+.pos-container
+	position relative
+.pos
+	position absolute
+
+for y in top bottom ""
+	for x in left right middle
+		.pos-{y}{x}
+			position absolute
+			if !y or x is middle
+				if y
+					{y} 0
+				else
+					top 50%
+				if x is middle
+					left 50%
+				else
+					{x} 0
+				transform translate((x is middle ? -50 : 0)%, (y ? 0 : -50)%)
+			else
+				{y} 0
+				{x} 0
+
+.row
+	display -ms-flexbox
+	display flex
+	-ms-flex-wrap wrap
+	flex-wrap wrap
+
+[class^=col-]
+[class*= col-]
+	position relative
+	width 100%
+	min-height 1px
+
+.col
+	-ms-flex-preferred-size 0
+	flex-basis 0
+	-ms-flex-positive 1
+	flex-grow 1
+	max-width 100%
+.col-auto
+	-ms-flex 0 0 auto
+	flex 0 0 auto
+	width auto
+	max-width none
+
+mixin-col(size, kscr)
+	width = round(size / 12 * 100%, 6)
+	.col{kscr}-{size}
+		-ms-flex 0 0 width
+		flex 0 0 width
+		max-width width
+	.offset{kscr}-{size}
+		margin-left width
+
+mixin-flex(kscr)
+	.center{kscr}
+		justify-content center
+	.between{kscr}
+		justify-content space-between
+	.around{kscr}
+		justify-content space-around
+	.evenly{kscr}
+		justify-content space-evenly
+	.start{kscr}
+		justify-content flex-start
+	.end{kscr}
+		justify-content flex-end
+
+	.middle{kscr}
+		align-items center
+	.top{kscr}
+		align-items flex-start
+	.bottom{kscr}
+		align-items flex-end
+
+	.flex{kscr}-row
+		flex-direction row !important
+	.flex{kscr}-column
+		flex-direction column !important
+	.flex{kscr}-row-reverse
+		flex-direction row-reverse !important
+	.flex{kscr}-column-reverse
+		flex-direction column-reverse !important
+	.flex{kscr}-wrap
+		flex-wrap wrap !important
+	.flex{kscr}-nowrap
+		flex-wrap nowrap !important
+	.flex{kscr}-wrap-reverse
+		flex-wrap wrap-reverse !important
+	.flex{kscr}-fill
+		flex 1 1 auto !important
+	.flex{kscr}-grow-0
+		flex-grow 0 !important
+	.flex{kscr}-grow-1
+		flex-grow 1 !important
+	.flex{kscr}-shrink-0
+		flex-shrink 0 !important
+	.flex{kscr}-shrink-1
+		flex-shrink 1 !important
+
+mixin-d(kscr)
+	for d in none inline inline-block block table table-row table-cell flex inline-flex flow-root
+		.{d}{kscr}
+			display d !important
+
+scrs = {
+	-sm: 576
+	-md: 768
+	-lg: 992
+	-xl: 1200
+}
+
+mixin-flex("")
+mixin-d("")
+
+for size in 1..12
+	mixin-col(size, "")
+
+for kscr, vscr in scrs
+	@media (min-width: (vscr)px)
+		mixin-flex(kscr)
+		mixin-d(kscr)
+
+		.col{kscr}
+			@extend .col
+		.col{kscr}-auto
+			@extend .col-auto
+
+		for size in 1..12
+			mixin-col(size, kscr)
+
+.spin
+	animation spin 2s infinite linear
+@keyframes spin
+	from
+		transform rotate(0deg)
+	to
+		transform rotate(360deg)
+
+.opacity
+	opacity .6
+
+for pos in absolute relative fixed sticky static
+	.{pos}
+		position: pos !important
+
+for perc in range(0, 100, 5)
+	.t-{perc}
+		top (perc)%
+	.l-{perc}
+		left (perc)%
+	.b-{perc}
+		bottom (perc)%
+	.r-{perc}
+		right (perc)%
+	.w-{perc}
+		width (perc)%
+	.h-{perc}
+		height (perc)%
+
+.w-fit
+	width fit-content
+.h-fit
+	height fit-content
+.w-fill
+	width fill-available
+.h-fill
+	height fill-available
+
+props = {
+	p: padding
+	m: margin
+}
+for kprop, vprop in props
+	sides = {
+		"": ""
+		t: -top
+		b: -bottom
+		l: -left
+		r: -right
+		x: -left -right
+		y: -top -bottom
+	}
+	for kside, vside in sides
+		sizes = {
+			"": 4px
+			"-0": 0
+			"-1": 2px
+			"-2": 4px
+			"-3": 8px
+			"-4": 12px
+			"-5": 16px
+			-auto: auto
+		}
+		for ksize, vsize in sizes
+			.{kprop}{kside}{ksize}
+				for vvside in vside
+					{vprop}{vvside} vsize !important
+
+.overflow
+	overflow visible
+.overflow-auto
+	overflow auto
+.overflow-hide
+	overflow hidden
+
+.event
+	pointer-events auto
+.no-event
+	pointer-events none
+
+.hide-empty:empty
+	display none !important
+
+for cur in auto cell col-resize copy crosshair default e-resize grab grabbing help move n-resize ne-resize nw-resize not-allowed none pointer progress row-resize text wait zoom-in zoom-out
+	.cursor-{cur}
+		cursor: cur
+
+.align-center
+	text-align center !important
+.left
+	float left !important
+.right
+	float right !important
