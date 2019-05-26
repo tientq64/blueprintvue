@@ -1,6 +1,6 @@
 # blueprintvue
-
 ### incomplete
+
 > Version for vue is based on the Blueprint UI toolkit for web
 
 ## Build Setup
